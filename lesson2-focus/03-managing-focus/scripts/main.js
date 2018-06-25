@@ -1,3 +1,5 @@
+let firstVisit = true;
+
 page('/', function() {
   page.redirect('/what-is-vegemite');
 });
@@ -19,6 +21,12 @@ page('/:slug', function(context) {
   newMenuItem.classList.add('is-active');
   newPage.classList.add('is-active');
 
+  // Don't set the focus until the user clicks on a menu item
+  if (firstVisit) {
+    firstVisit = false;
+    return;
+  }
+  newPage.querySelector('h2').focus();
 });
 
 page({
