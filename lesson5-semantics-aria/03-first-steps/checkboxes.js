@@ -20,7 +20,10 @@
     this.el.addEventListener('keydown', this.handleKeyDown.bind(this));
     this.el.addEventListener('click', this.toggle.bind(this));
 
-    // Any other set-up we want to do here?
+    // Update the new checkbox with ARIA attributs
+    this.el.setAttribute('role', 'checkbox');
+    const checkedValue = this.el.hasAttribute('checked') ? 'true' : 'false';
+    this.el.setAttribute('aria-checked', checkedValue);
   }
 
   Checkbox.prototype.handleKeyDown = function(e) {
@@ -37,12 +40,12 @@
     if (this.el.hasAttribute('checked')) {
       this.el.removeAttribute('checked');
 
-      // Hmm.
+      this.el.setAttribute('aria-checked', 'false');
 
     } else {
       this.el.setAttribute('checked', '');
 
-      // Hmmmmm.
+      this.el.setAttribute('aria-checked', 'true');
 
     }
   };
